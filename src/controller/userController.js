@@ -2,6 +2,15 @@ const jwt = require('jsonwebtoken');
 const validator= require('validator');
 const userModel = require('../models/userModel');
 
+const isValid = function(value){
+  if(typeof value === 'undefined' || value === null) return false
+  if(typeof value === 'string' && value.trim().length === 0) return false
+  return true
+}
+
+if(isValid(title)){
+  return res.status(400).send({status:false,message:"invalid title format"});
+}
 const registerUser = async function (req, res) {
     try {
         const requestBody = req.body;

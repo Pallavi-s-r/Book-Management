@@ -11,7 +11,7 @@ router.post('/login',userContrlr.login);
 
 //book apis
 router.post('/books', Mid.authenticationMid,Mid.authorizationMidd,Validtn.bookValidation,BookContrl.createBooks);//done
-router.get('/books',Mid.authenticationMid,BookContrl.getAllBooks);
+router.get('/books',Mid.authorizationMid,BookContrl.getAllBooks);
 router.get('/books/:bookId',Mid.authenticationMid,BookContrl.getBookById);
 router.put('/books/:bookId',Mid.authenticationMid,Mid.authorizationMid,BookContrl.updateBookById);
 router.delete('/books/:bookId',Mid.authenticationMid,Mid.authorizationMid,BookContrl.deleteBookById);

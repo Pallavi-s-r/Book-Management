@@ -1,7 +1,19 @@
 const BookModel = require('../models/bookModel');
 const ReviewModel = require('../models/reviewModel');
 
+const isValid = function(value){
+  if(typeof value === 'undefined' || value === null) return false
+  if(typeof value === 'string' && value.trim().length === 0) return false
+  return true
+}
 //book creation api -
+
+if(isValid(userId)){
+  return res.status(400).send({status:false,message:"invalid userId"});
+}
+if(isValid(releasedAt)){
+  return res.status(400).send({status:false,message:"invalid date format"});
+}
 
 const createBooks = async function (req, res) {
     try {
@@ -17,7 +29,18 @@ const createBooks = async function (req, res) {
           return res.status(400).json({ status: false, message: "A book with the same ISBN already exists" });
         }
 
-        const book = await BookModel.create(data);
+        const book = await BookModel.create({
+          title,
+          excerpt,
+          userId,
+          ISBN,
+          category,
+          subcategory,
+          reviews,
+          deletedAt,
+          isDeleted,
+          releasedAt
+        });
         const createdBook = {
             _id: book._id,
             title: book.title,
