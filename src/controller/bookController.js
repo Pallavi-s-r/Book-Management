@@ -81,7 +81,7 @@ const getAllBooks = async (req, res) => {
         .select({ _id: 1, title: 1, excerpt: 1, userId: 1, category: 1,subcategory:1, releasedAt: 1, reviews: 1 })
         .sort({ title: 1 });
   
-      if (books[0].length === 0) {
+      if (books.length === 0) {
         return res.status(404).json({ status: false, message: "No books found" });
       }
   
